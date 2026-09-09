@@ -1,0 +1,27 @@
+---
+import GraphicSpecies from "../../components/GraphicSpecies.astro";
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Espèce Gentoo</title>
+  </head>
+  <body class="bg-slate-50 p-6 text-slate-900 md:p-10">
+    <main class="mx-auto max-w-5xl">
+      <nav class="mb-8 flex flex-wrap gap-2" aria-label="Navigation des espèces">
+        <a href="/species/Adelie" class="rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-100">Adelie</a>
+        <a href="/species/Gentoo" class="rounded-md bg-blue-100 px-3 py-2 text-sm font-bold text-blue-900" aria-current="page">Gentoo</a>
+        <a href="/species/Chinstrap" class="rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-100">Chinstrap</a>
+        <a href="/species" class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">Les trois espèces</a>
+      </nav>
+      <header class="mb-8">
+        <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Manchots de Palmer</p>
+        <h1 class="text-4xl font-bold tracking-tight">Espèce Gentoo</h1>
+        <p class="mt-3 max-w-2xl text-slate-600">Explorez les mesures de longueur et de profondeur du culmen pour les manchots Gentoo.</p>
+      </header>
+      <GraphicSpecies species="Gentoo" />
+    </main>
+  </body>
+</html>
