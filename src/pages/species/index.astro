@@ -1,0 +1,63 @@
+---
+import GraphicSpecies from "../../components/GraphicSpecies.astro";
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Comparer les espèces</title>
+  </head>
+  <body class="bg-slate-50 p-6 text-slate-900 md:p-10">
+    <main class="mx-auto max-w-5xl">
+      <nav class="mb-8 flex flex-wrap gap-2" aria-label="Navigation des graphiques">
+        <a href="#adelie" class="menu-item rounded-md px-3 py-2 text-sm font-semibold text-slate-800 transition-colors hover:bg-red-300 [&.active]:bg-red-200">Adelie</a>
+        <a href="#gentoo" class="menu-item rounded-md px-3 py-2 text-sm font-semibold text-slate-800 transition-colors hover:bg-red-300 [&.active]:bg-red-200">Gentoo</a>
+        <a href="#chinstrap" class="menu-item rounded-md px-3 py-2 text-sm font-semibold text-slate-800 transition-colors hover:bg-red-300 [&.active]:bg-red-200">Chinstrap</a>
+        <a href="/species/Adelie" class="rounded-md px-3 py-2 text-sm text-blue-700 hover:bg-blue-100">Pages séparées</a>
+      </nav>
+
+      <header class="mb-8">
+        <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">TP2 · Observable Plot</p>
+        <h1 class="text-4xl font-bold tracking-tight">Comparer les manchots</h1>
+        <p class="mt-3 max-w-2xl text-slate-600">Faites défiler les graphiques ou utilisez les ancres pour observer chaque espèce.</p>
+      </header>
+
+      <section aria-label="Graphiques par espèce" class="overflow-hidden rounded-lg border border-slate-200 bg-white p-4 shadow-sm md:p-8">
+        <div class="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4" id="species-slider">
+          <GraphicSpecies species="Adelie" />
+          <GraphicSpecies species="Gentoo" />
+          <GraphicSpecies species="Chinstrap" />
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+
+<script>
+  const menuItems = document.querySelectorAll(".menu-item");
+  const items = document.querySelectorAll(".item");
+  const slider = document.querySelector("#species-slider");
+
+  console.log("menuItems", menuItems);
+  console.log("items", items);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute("id");
+        const menuItem = document.querySelector(`.menu-item[href="#${id}"]`);
+        if (entry.isIntersecting) {
+          menuItem?.classList.add("active");
+        } else {
+          menuItem?.classList.remove("active");
+        }
+      });
+    },
+    { root: slider, threshold: 0.5 },
+  );
+
+  items.forEach((item) => {
+    observer.observe(item);
+  });
+</script>
