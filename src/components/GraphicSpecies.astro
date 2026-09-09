@@ -1,0 +1,26 @@
+---
+import * as Plot from "@observablehq/plot";
+import PlotFigure from "./PlotFigure.astro";
+import penguins from "../assets/penguins.json";
+
+const { species } = Astro.props;
+const penguinsFiltered = penguins.filter((p) => p.species === species);
+
+const plotOptions: Plot.PlotOptions = {
+  title: `Espèce : ${species}`,
+  grid: true,
+  marks: [
+    Plot.dot(penguinsFiltered, {
+      x: "culmen_length_mm",
+      y: "culmen_depth_mm",
+      stroke: "species",
+      tip: true,
+    }),
+  ],
+};
+---
+
+<figure class="item min-w-full snap-start scroll-mt-24" id={species.toLowerCase()}>
+  <PlotFigure options={plotOptions} />
+  <figcaption class="text-sm text-gray-500 mt-2">Population {species}</figcaption>
+</figure>
