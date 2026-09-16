@@ -35,3 +35,30 @@ import GraphicSpecies from "../components/GraphicSpecies.astro";
     </main>
   </body>
 </html>
+
+<script>
+  const menuItems = document.querySelectorAll(".menu-item");
+  const items = document.querySelectorAll(".item");
+
+  console.log("menuItems", menuItems);
+  console.log("items", items);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute("id");
+        const menuItem = document.querySelector(`.menu-item[href="#${id}"]`);
+        if (entry.isIntersecting) {
+          menuItem?.classList.add("active", "bg-red-200");
+        } else {
+          menuItem?.classList.remove("active", "bg-red-200");
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  items.forEach((item) => {
+    observer.observe(item);
+  });
+</script>
