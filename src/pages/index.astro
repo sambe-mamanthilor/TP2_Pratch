@@ -1,33 +1,37 @@
 ---
-import PlotFigure from "../components/PlotFigure.astro";
-import Layout from "../layouts/Layout.astro";
-import * as Plot from "@observablehq/plot";
-import penguins from "../assets/penguins.json";
+import GraphicSpecies from "../components/GraphicSpecies.astro";
 ---
 
-<Layout>
-  <main class="mx-auto max-w-5xl px-6 py-12">
-    <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">TP2 · Observable Plot</p>
-    <h1 class="text-4xl font-bold tracking-tight text-slate-900">Les manchots de Palmer</h1>
-    <p class="mt-3 max-w-2xl text-slate-600">Comparez les espèces avec des graphiques filtrés ou explorez chaque population sur sa propre page.</p>
-    <nav class="mt-8 flex flex-wrap gap-3" aria-label="Accès aux graphiques">
-      <a href="/species" class="rounded-md bg-blue-700 px-4 py-3 font-semibold text-white hover:bg-blue-800">Comparer les trois espèces</a>
-      <a href="/species/Adelie" class="rounded-md border border-slate-300 px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100">Voir les pages séparées</a>
-    </nav>
-    <section class="mt-14 rounded-lg border border-slate-200 bg-white p-4 shadow-sm md:p-8" aria-label="Vue d'ensemble des données">
-      <h2 class="mb-5 text-xl font-semibold text-slate-900">Vue d'ensemble</h2>
-      <PlotFigure
-        options={{
-          marks: [
-            Plot.dot(penguins, {
-              x: "culmen_length_mm",
-              y: "culmen_depth_mm",
-              stroke: "species",
-            }),
-          ],
-          grid: true,
-        }}
-      />
-    </section>
-  </main>
-</Layout>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>TP2 - Slider & IntersectionObserver</title>
+  </head>
+  <body class="p-8">
+    <header class="sticky top-0 bg-white p-4 shadow-md z-10 mb-6">
+      <nav class="flex gap-4">
+        <a href="#adelie" class="menu-item px-4 py-2 rounded transition-colors">Adelie</a>
+        <a href="#gentoo" class="menu-item px-4 py-2 rounded transition-colors">Gentoo</a>
+        <a href="#chinstrap" class="menu-item px-4 py-2 rounded transition-colors">Chinstrap</a>
+      </nav>
+    </header>
+
+    <!-- Slider horizontal CSS -->
+    <main class="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-8">
+      <section id="adelie" class="item min-w-full snap-center bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-bold mb-4">Adelie</h2>
+        <GraphicSpecies species="Adelie" />
+      </section>
+
+      <section id="gentoo" class="item min-w-full snap-center bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-bold mb-4">Gentoo</h2>
+        <GraphicSpecies species="Gentoo" />
+      </section>
+
+      <section id="chinstrap" class="item min-w-full snap-center bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-bold mb-4">Chinstrap</h2>
+        <GraphicSpecies species="Chinstrap" />
+      </section>
+    </main>
+  </body>
+</html>
